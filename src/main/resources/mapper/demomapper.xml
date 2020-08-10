@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+  <mapper namespace="com.yang.main.dataoperator.DataMapper">
+      <select id="find" resultType="com.yang.main.dataoperator.Music">
+      SELECT * FROM my_test
+  </select>
+  
+      <insert id="insert" parameterType="com.yang.main.dataoperator.Music">
+          INSERT my_test(things,type,timer) VALUES(#{things},#{type},#{timer});
+      </insert>
+      
+      <update id="update" parameterType="com.yang.main.dataoperator.Music">
+          UPDATE my_test SET things=#{things},type=#{type},timer=#{timer} WHERE id=#{id};
+      </update>
+      
+      <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="true">
+          INSERT my_test(things,type,timer)
+          VALUES
+          <foreach collection="list" item="item" index="index" separator=",">
+              (
+              #{item.things},
+              #{item.type},
+              #{item.timer}
+              )
+          </foreach>
+      </insert>
+  </mapper>
+  
